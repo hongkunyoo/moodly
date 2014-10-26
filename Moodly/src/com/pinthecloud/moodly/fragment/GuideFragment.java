@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.pinthecloud.moodly.R;
-import com.pinthecloud.moodly.activity.GuideActivity;
+import com.pinthecloud.moodly.activity.PerformListActivity;
 
 public class GuideFragment extends MoFragment{
 
@@ -37,7 +37,7 @@ public class GuideFragment extends MoFragment{
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, GuideActivity.class);
+				Intent intent = new Intent(context, PerformListActivity.class);
 				startActivity(intent);
 				activity.finish();
 			}

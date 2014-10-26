@@ -2,7 +2,6 @@ package com.pinthecloud.moodly.fragment;
 
 import java.util.List;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,7 +35,6 @@ public class PerformListFragment extends MoFragment{
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.fragment_perform_list, container, false);
-		setActionBar();
 		findComponent(view);
 		setList();
 		return view;
@@ -46,14 +44,8 @@ public class PerformListFragment extends MoFragment{
 	@Override
 	public void onStart() {
 		super.onStart();
-		updatePerformList();
-	}
-
-
-	private void setActionBar(){
-		ActionBar actionBar = activity.getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
+		progressBar.setVisibility(View.VISIBLE);
+		//		updatePerformList();
 	}
 
 
@@ -82,7 +74,7 @@ public class PerformListFragment extends MoFragment{
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				updatePerformList();
+				//				updatePerformList();
 			}
 		});
 	}
