@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">moodly</string>
-    <string name="hello_world">Hello world!</string>
-
+    <!-- Common Word -->
+    <string name="app_name">Moodly</string>
+    <string name="introduce">Introduce</string>
+    
+    <!-- Common Sentence -->
+    <string name="internet_not_connected_message">Internet is unavailable. Please check network status.</string>
+    <string name="google_play_services_not_existed_message">Google Play Service is unavailable. Please check it.</string>
+    
+    <!-- Guide -->
+    <string name="start_app">Start App!</string>
+    
 </resources>
