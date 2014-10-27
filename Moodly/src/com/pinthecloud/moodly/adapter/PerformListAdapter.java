@@ -19,15 +19,12 @@ public class PerformListAdapter extends ArrayAdapter<Perform>{
 
 	private Context context;
 	private MoFragment frag;
-	
+
 	private TextView tag;
 	private ImageView poster;
 	private TextView performName;
-	private TextView musician;
-	private TextView beginDay;
-	private TextView finishDay;
 	private TextView theaterAddress;
-	
+
 	private CachedBlobStorageHelper blobStorageHelper;
 
 
@@ -62,9 +59,6 @@ public class PerformListAdapter extends ArrayAdapter<Perform>{
 		tag = (TextView)view.findViewById(R.id.row_perform_list_tag);
 		poster = (ImageView)view.findViewById(R.id.row_perform_list_poster);
 		performName = (TextView)view.findViewById(R.id.row_perform_list_perform_name);
-		musician = (TextView)view.findViewById(R.id.row_perform_list_musician);
-		beginDay = (TextView)view.findViewById(R.id.row_perform_list_begin_day);
-		finishDay = (TextView)view.findViewById(R.id.row_perform_list_finish_day);
 		theaterAddress = (TextView)view.findViewById(R.id.row_perform_list_theater_address);
 	}
 
@@ -72,9 +66,6 @@ public class PerformListAdapter extends ArrayAdapter<Perform>{
 	private void setTextView(Perform perform){
 		tag.setText(perform.getPerformName());
 		performName.setText(perform.getPerformName());
-		musician.setText(perform.getPerformName());
-		beginDay.setText(perform.getBeginDay());
-		finishDay.setText(perform.getFinishDay());
 		theaterAddress.setText(perform.getTheaterAddress());
 	}
 }

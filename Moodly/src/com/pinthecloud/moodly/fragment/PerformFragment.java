@@ -20,9 +20,6 @@ public class PerformFragment extends MoFragment{
 	private TextView theaterName;
 	private TextView theaterAddress;
 	private TextView theaterCity;
-	private TextView beginDay;
-	private TextView finishDay;
-	private TextView performTime;
 	private TextView price;
 
 
@@ -59,9 +56,6 @@ public class PerformFragment extends MoFragment{
 		theaterName = (TextView)view.findViewById(R.id.perform_frag_theater_name);
 		theaterAddress = (TextView)view.findViewById(R.id.perform_frag_theater_address);
 		theaterCity = (TextView)view.findViewById(R.id.perform_frag_theater_city);
-		beginDay = (TextView)view.findViewById(R.id.perform_frag_begin_day);
-		finishDay = (TextView)view.findViewById(R.id.perform_frag_finish_day);
-		performTime = (TextView)view.findViewById(R.id.perform_frag_perform_time);
 		price = (TextView)view.findViewById(R.id.perform_frag_price);
 	}
 
@@ -71,9 +65,6 @@ public class PerformFragment extends MoFragment{
 		theaterName.setText(perform.getTheaterName());
 		theaterAddress.setText(perform.getTheaterAddress());
 		theaterCity.setText(perform.getTheaterCity());
-		beginDay.setText(perform.getBeginDay());
-		finishDay.setText(perform.getFinishDay());
-		performTime.setText(perform.getPerformTime());
 		price.setText(""+perform.getPrice());
 	}
 }
