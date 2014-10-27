@@ -112,7 +112,7 @@ public class PerformHelper {
 			return;
 		}
 
-		performTable.select("*").execute(new TableQueryCallback<Perform>() {
+		performTable.where().execute(new TableQueryCallback<Perform>() {
 
 			@Override
 			public void onCompleted(List<Perform> result, int count, Exception exception,

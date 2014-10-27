@@ -26,17 +26,18 @@ public class GuideFragment extends MoFragment{
 		return view;
 	}
 
-	
+
 	private void findComponent(View view){
 		startButton = (Button)view.findViewById(R.id.guide_frag_start_button);
 	}
 
-	
+
 	private void setButtonEvent(){
 		startButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				userHelper.setLoggedInUser(true);
 				Intent intent = new Intent(context, PerformListActivity.class);
 				startActivity(intent);
 				activity.finish();

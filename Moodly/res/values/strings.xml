@@ -4,12 +4,18 @@
     <!-- Common Word -->
     <string name="app_name">Moodly</string>
     <string name="introduce">Introduce</string>
-    
+    <string name="hyphen">-</string>
+    <string name="slash">/</string>
+    <string name="poster">Poster</string>
+
     <!-- Common Sentence -->
     <string name="internet_not_connected_message">Internet is unavailable. Please check network status.</string>
     <string name="google_play_services_not_existed_message">Google Play Service is unavailable. Please check it.</string>
-    
+
     <!-- Guide -->
     <string name="start_app">Start App!</string>
-    
+
+    <!-- Perform -->
+    <string name="unit">Dollar</string>
+
 </resources>

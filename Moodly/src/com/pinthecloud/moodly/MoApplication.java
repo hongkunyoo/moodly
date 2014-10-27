@@ -11,6 +11,7 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.pinthecloud.moodly.analysis.FiveRocksHelper;
 import com.pinthecloud.moodly.analysis.FlurryHelper;
 import com.pinthecloud.moodly.analysis.UserHabitHelper;
+import com.pinthecloud.moodly.helper.CachedBlobStorageHelper;
 import com.pinthecloud.moodly.helper.PerformHelper;
 import com.pinthecloud.moodly.helper.UserHelper;
 
@@ -31,6 +32,7 @@ public class MoApplication extends Application{
 	// Helper
 	private static UserHelper userHelper;
 	private static PerformHelper performHelper;
+	private static CachedBlobStorageHelper blobStorageHelper;
 
 	// Analysis
 	private static FiveRocksHelper fiveRocksHelper;
@@ -62,6 +64,7 @@ public class MoApplication extends Application{
 
 		userHelper = new UserHelper();
 		performHelper = new PerformHelper();
+		blobStorageHelper = new CachedBlobStorageHelper();
 
 		fiveRocksHelper = new FiveRocksHelper();
 		userHabitHelper = new UserHabitHelper();
@@ -80,6 +83,9 @@ public class MoApplication extends Application{
 	}
 	public PerformHelper getPerformHelper() {
 		return performHelper;
+	}
+	public CachedBlobStorageHelper getBlobStorageHelper() {
+		return blobStorageHelper;
 	}
 	public FiveRocksHelper getFiveRocksHelper() {
 		return fiveRocksHelper;

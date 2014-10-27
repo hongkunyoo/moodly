@@ -3,6 +3,7 @@ package com.pinthecloud.moodly.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.pinthecloud.moodly.R;
 import com.pinthecloud.moodly.fragment.PerformFragment;
@@ -19,5 +20,17 @@ public class PerformActivity extends MoActivity{
 		PerformFragment fragment = new PerformFragment();
 		fragmentTransaction.add(R.id.activity_container, fragment);
 		fragmentTransaction.commit();
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			break;
+		}
+		return true;
 	}
 }

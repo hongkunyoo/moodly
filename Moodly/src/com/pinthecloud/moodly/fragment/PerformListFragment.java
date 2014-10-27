@@ -44,8 +44,20 @@ public class PerformListFragment extends MoFragment{
 	@Override
 	public void onStart() {
 		super.onStart();
+
+		//		Perform perform = new Perform();
+		//		perform.setPerformName("테스트2");
+		//		perform.setPosterUrl("none");
+		//		perform.setPrice(0);
+		//		perform.setTheaterAddress("서초구");
+		//		perform.setTheaterName("클럽ff");
+		//		perform.setBeginDay("10/29");
+		//		perform.setFinishDay("10/30");
+		//		perform.setPerformTime("19:00");
+		//		performHelper.addPerformAsync(thisFragment, perform, null);
+
 		progressBar.setVisibility(View.VISIBLE);
-		//		updatePerformList();
+		updatePerformList();
 	}
 
 
@@ -58,13 +70,13 @@ public class PerformListFragment extends MoFragment{
 
 
 	private void setList(){
-		performListAdapter = new PerformListAdapter(context);
+		performListAdapter = new PerformListAdapter(context, thisFragment);
 		performListView.setAdapter(performListAdapter);
 		performListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Perform perform = performListAdapter.getItem(--position);
+				Perform perform = performListAdapter.getItem(position);
 				Intent intent = new Intent(context, PerformActivity.class);
 				intent.putExtra(MoGlobalVariable.PERFORM_KEY, perform);
 				startActivity(intent);
@@ -74,7 +86,7 @@ public class PerformListFragment extends MoFragment{
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				//				updatePerformList();
+				updatePerformList();
 			}
 		});
 	}

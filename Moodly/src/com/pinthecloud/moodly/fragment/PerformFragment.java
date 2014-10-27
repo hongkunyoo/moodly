@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.pinthecloud.moodly.MoGlobalVariable;
 import com.pinthecloud.moodly.R;
@@ -14,6 +15,15 @@ import com.pinthecloud.moodly.model.Perform;
 public class PerformFragment extends MoFragment{
 
 	private Perform perform;
+
+	private TextView performName;
+	private TextView theaterName;
+	private TextView theaterAddress;
+	private TextView theaterCity;
+	private TextView beginDay;
+	private TextView finishDay;
+	private TextView performTime;
+	private TextView price;
 
 
 	@Override
@@ -30,6 +40,8 @@ public class PerformFragment extends MoFragment{
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.fragment_perform, container, false);
 		setActionBar();
+		findComponent(view);
+		setTextView(perform);
 		return view;
 	}
 
@@ -39,5 +51,29 @@ public class PerformFragment extends MoFragment{
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setTitle(perform.getPerformName());
+	}
+
+
+	private void findComponent(View view){
+		performName = (TextView)view.findViewById(R.id.perform_frag_perform_name);
+		theaterName = (TextView)view.findViewById(R.id.perform_frag_theater_name);
+		theaterAddress = (TextView)view.findViewById(R.id.perform_frag_theater_address);
+		theaterCity = (TextView)view.findViewById(R.id.perform_frag_theater_city);
+		beginDay = (TextView)view.findViewById(R.id.perform_frag_begin_day);
+		finishDay = (TextView)view.findViewById(R.id.perform_frag_finish_day);
+		performTime = (TextView)view.findViewById(R.id.perform_frag_perform_time);
+		price = (TextView)view.findViewById(R.id.perform_frag_price);
+	}
+
+
+	private void setTextView(Perform perform){
+		performName.setText(perform.getPerformName());
+		theaterName.setText(perform.getTheaterName());
+		theaterAddress.setText(perform.getTheaterAddress());
+		theaterCity.setText(perform.getTheaterCity());
+		beginDay.setText(perform.getBeginDay());
+		finishDay.setText(perform.getFinishDay());
+		performTime.setText(perform.getPerformTime());
+		price.setText(""+perform.getPrice());
 	}
 }

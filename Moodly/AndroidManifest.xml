@@ -44,8 +44,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.IntroduceActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/introduce" />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

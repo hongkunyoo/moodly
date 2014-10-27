@@ -26,8 +26,7 @@ public class BlobStorageHelper {
 	private static final String storageConnectionString = 
 			"DefaultEndpointsProtocol=http;AccountName=athere;AccountKey=ldhgydlWndSIl7XfiaAQ+sibsNtVZ1Psebba1RpBKxMbyFVYUCMvvuQir0Ty7f0+8TnNLfFKc9yFlYpP6ZSuQQ==";
 
-	public static final String USER_PROFILE = "userprofile";
-	public static final String SQUARE_PROFILE = "squareprofile";
+	public static final String PERFORM_POSTER = "performposter";
 
 	protected CloudBlobClient blobClient;
 
