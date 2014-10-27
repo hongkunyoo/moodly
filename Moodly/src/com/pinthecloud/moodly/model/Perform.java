@@ -1,32 +1,25 @@
 package com.pinthecloud.moodly.model;
 
+import java.util.List;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Perform implements Parcelable{
-	@com.google.gson.annotations.SerializedName("id")
 	private String id;
-	@com.google.gson.annotations.SerializedName("performName")
 	private String performName;
-	@com.google.gson.annotations.SerializedName("price")
 	private float price;
-	@com.google.gson.annotations.SerializedName("theaterName")
-	private String theaterName;
-	@com.google.gson.annotations.SerializedName("theaterAddress")
-	private String theaterAddress;
-	@com.google.gson.annotations.SerializedName("theaterCity")
-	private String theaterCity;
-	@com.google.gson.annotations.SerializedName("posterUrl")
+	private String placeName;
+	private String placeAddress01;
+	private String placeAddress02;
 	private String posterUrl;
-	@com.google.gson.annotations.SerializedName("begindDay")
-	private String beginDay;
-	@com.google.gson.annotations.SerializedName("finishDay")
-	private String finishDay;
-	@com.google.gson.annotations.SerializedName("performTime")
-	private String performTime;
-	// 분위기, 장르, 뮤지션, 영상 링크, 소개 글
-
-
+	private String startDate;
+	private String endDate;
+	private String time;
+	private String description;
+	private List<Musician> lineup;
+	private List<String> mood;
+	
 	public Perform() {
 		// Do nothing
 	}
@@ -34,8 +27,7 @@ public class Perform implements Parcelable{
 		this();
 		readToParcel(in);
 	}
-
-
+	
 	public String getId() {
 		return id;
 	}
@@ -54,23 +46,23 @@ public class Perform implements Parcelable{
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	public String getTheaterName() {
-		return theaterName;
+	public String getPlaceName() {
+		return placeName;
 	}
-	public void setTheaterName(String theaterName) {
-		this.theaterName = theaterName;
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
 	}
-	public String getTheaterAddress() {
-		return theaterAddress;
+	public String getPlaceAddress01() {
+		return placeAddress01;
 	}
-	public void setTheaterAddress(String theaterAddress) {
-		this.theaterAddress = theaterAddress;
+	public void setPlaceAddress01(String placeAddress01) {
+		this.placeAddress01 = placeAddress01;
 	}
-	public String getTheaterCity() {
-		return theaterCity;
+	public String getPlaceAddress02() {
+		return placeAddress02;
 	}
-	public void setTheaterCity(String theaterCity) {
-		this.theaterCity = theaterCity;
+	public void setPlaceAddress02(String placeAddress02) {
+		this.placeAddress02 = placeAddress02;
 	}
 	public String getPosterUrl() {
 		return posterUrl;
@@ -78,33 +70,50 @@ public class Perform implements Parcelable{
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
-	public String getBeginDay() {
-		return beginDay;
+	public String getStartDate() {
+		return startDate;
 	}
-	public void setBeginDay(String beginDay) {
-		this.beginDay = beginDay;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-	public String getFinishDay() {
-		return finishDay;
+	public String getEndDate() {
+		return endDate;
 	}
-	public void setFinishDay(String finishDay) {
-		this.finishDay = finishDay;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
-	public String getPerformTime() {
-		return performTime;
+	public String getTime() {
+		return time;
 	}
-	public void setPerformTime(String performTime) {
-		this.performTime = performTime;
+	public void setTime(String time) {
+		this.time = time;
 	}
-
-
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public List<Musician> getLineup() {
+		return lineup;
+	}
+	public void setLineup(List<Musician> lineup) {
+		this.lineup = lineup;
+	}
+	public List<String> getMood() {
+		return mood;
+	}
+	public void setMood(List<String> mood) {
+		this.mood = mood;
+	}
+	
 	/*
 	 * Parcelable
 	 */
 	public static Parcelable.Creator<Perform> getCreator() {
 		return CREATOR;
 	}
-
+	
 	public static final Parcelable.Creator<Perform> CREATOR = new Creator<Perform>(){
 		public Perform createFromParcel(Parcel in){
 			return new Perform(in);
@@ -124,25 +133,33 @@ public class Perform implements Parcelable{
 		dest.writeString(getId());
 		dest.writeString(getPerformName());
 		dest.writeFloat(getPrice());
-		dest.writeString(getTheaterName());
-		dest.writeString(getTheaterAddress());
-		dest.writeString(getTheaterCity());
+		dest.writeString(getPlaceName());
+		dest.writeString(getPlaceAddress01());
+		dest.writeString(getPlaceAddress02());
 		dest.writeString(getPosterUrl());
-		dest.writeString(getBeginDay());
-		dest.writeString(getFinishDay());
-		dest.writeString(getPerformTime());
+		dest.writeString(getStartDate());
+		dest.writeString(getEndDate());
+		dest.writeString(getTime());
+		dest.writeString(getDescription());
+		dest.writeList(lineup);
+		dest.writeList(mood);
 	}
 
 	public void readToParcel(Parcel in){
 		setId(in.readString());
 		setPerformName(in.readString());
 		setPrice(in.readFloat());
-		setTheaterName(in.readString());
-		setTheaterAddress(in.readString());
-		setTheaterCity(in.readString());
+		setPlaceName(in.readString());
+		setPlaceAddress01(in.readString());
+		setPlaceAddress02(in.readString());
 		setPosterUrl(in.readString());
-		setBeginDay(in.readString());
-		setFinishDay(in.readString());
-		setPerformTime(in.readString());
+		setStartDate(in.readString());
+		setEndDate(in.readString());
+		setTime(in.readString());
+		setDescription(in.readString());
+		in.readList(lineup, Musician.class.getClassLoader());
+		setLineup(lineup);
+		in.readList(mood, String.class.getClassLoader());
+		setMood(mood);
 	}
 }

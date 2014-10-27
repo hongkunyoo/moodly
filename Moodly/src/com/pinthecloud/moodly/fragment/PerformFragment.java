@@ -17,11 +17,11 @@ public class PerformFragment extends MoFragment{
 	private Perform perform;
 
 	private TextView performName;
-	private TextView theaterName;
-	private TextView theaterAddress;
-	private TextView theaterCity;
-	private TextView beginDay;
-	private TextView finishDay;
+	private TextView placeName;
+	private TextView placeAddress01;
+	private TextView placeAddress02;
+	private TextView startDate;
+	private TextView endDate;
 	private TextView performTime;
 	private TextView price;
 
@@ -56,11 +56,11 @@ public class PerformFragment extends MoFragment{
 
 	private void findComponent(View view){
 		performName = (TextView)view.findViewById(R.id.perform_frag_perform_name);
-		theaterName = (TextView)view.findViewById(R.id.perform_frag_theater_name);
-		theaterAddress = (TextView)view.findViewById(R.id.perform_frag_theater_address);
-		theaterCity = (TextView)view.findViewById(R.id.perform_frag_theater_city);
-		beginDay = (TextView)view.findViewById(R.id.perform_frag_begin_day);
-		finishDay = (TextView)view.findViewById(R.id.perform_frag_finish_day);
+		placeName = (TextView)view.findViewById(R.id.perform_frag_theater_name);
+		placeAddress02 = (TextView)view.findViewById(R.id.perform_frag_theater_address);
+		placeAddress01 = (TextView)view.findViewById(R.id.perform_frag_theater_city);
+		startDate = (TextView)view.findViewById(R.id.perform_frag_begin_day);
+		endDate = (TextView)view.findViewById(R.id.perform_frag_finish_day);
 		performTime = (TextView)view.findViewById(R.id.perform_frag_perform_time);
 		price = (TextView)view.findViewById(R.id.perform_frag_price);
 	}
@@ -68,12 +68,12 @@ public class PerformFragment extends MoFragment{
 
 	private void setTextView(Perform perform){
 		performName.setText(perform.getPerformName());
-		theaterName.setText(perform.getTheaterName());
-		theaterAddress.setText(perform.getTheaterAddress());
-		theaterCity.setText(perform.getTheaterCity());
-		beginDay.setText(perform.getBeginDay());
-		finishDay.setText(perform.getFinishDay());
-		performTime.setText(perform.getPerformTime());
-		price.setText(""+perform.getPrice());
+		placeName.setText(perform.getPlaceName());
+		placeAddress02.setText(perform.getPlaceAddress02());
+		placeAddress01.setText(perform.getPlaceAddress01());
+		startDate.setText(perform.getStartDate());
+		endDate.setText(perform.getEndDate());
+		performTime.setText(perform.getTime());
+		price.setText(String.valueOf(perform.getPrice()));
 	}
 }
