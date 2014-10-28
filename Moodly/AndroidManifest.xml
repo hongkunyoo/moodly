@@ -45,6 +45,10 @@
         <activity
             android:name=".activity.IntroduceActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.pinthecloud.moodly.activity.HongkunActivity"
+            android:label="@string/title_activity_hongkun" >
+        </activity>
     </application>
 
 </manifest>

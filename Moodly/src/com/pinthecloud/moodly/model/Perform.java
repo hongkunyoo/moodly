@@ -1,9 +1,15 @@
 package com.pinthecloud.moodly.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.pinthecloud.moodly.util.RandomUtil;
 
 public class Perform implements Parcelable{
 	private String id;
@@ -13,10 +19,8 @@ public class Perform implements Parcelable{
 	private String placeAddress01;
 	private String placeAddress02;
 	private String posterUrl;
-	private String startDate;
-	private String endDate;
-	private String time;
 	private String description;
+	private List<Schedule> schedule;
 	private List<Musician> lineup;
 	private List<String> mood;
 	
@@ -70,29 +74,17 @@ public class Perform implements Parcelable{
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
-	public String getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<Schedule> getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(List<Schedule> list) {
+		this.schedule = list;
 	}
 	public List<Musician> getLineup() {
 		return lineup;
@@ -139,10 +131,8 @@ public class Perform implements Parcelable{
 		dest.writeString(getPlaceAddress01());
 		dest.writeString(getPlaceAddress02());
 		dest.writeString(getPosterUrl());
-		dest.writeString(getStartDate());
-		dest.writeString(getEndDate());
-		dest.writeString(getTime());
 		dest.writeString(getDescription());
+		dest.writeList(schedule);
 		dest.writeList(lineup);
 		dest.writeList(mood);
 	}
@@ -155,13 +145,67 @@ public class Perform implements Parcelable{
 		setPlaceAddress01(in.readString());
 		setPlaceAddress02(in.readString());
 		setPosterUrl(in.readString());
-		setStartDate(in.readString());
-		setEndDate(in.readString());
-		setTime(in.readString());
 		setDescription(in.readString());
+		in.readList(schedule, Schedule.class.getClassLoader());
+		setSchedule(schedule);
 		in.readList(lineup, Musician.class.getClassLoader());
 		setLineup(lineup);
 		in.readList(mood, String.class.getClassLoader());
 		setMood(mood);
+	}
+	
+	public JsonElement toJson() {
+		Gson gson = new Gson();
+		JsonObject jo = new JsonObject();
+		
+		jo.addProperty("id", getId());
+		jo.addProperty("performName", getPerformName());
+		jo.addProperty("price", getPrice());
+		jo.addProperty("placeName", getPlaceName());
+		jo.addProperty("placeAddress01", getPlaceAddress01());
+		jo.addProperty("placeAddress02", getPlaceAddress02());
+		jo.addProperty("postUrl", getPosterUrl());
+		jo.addProperty("description", getDescription());
+		jo.add("schedule", gson.fromJson(schedule.toString(), JsonElement.class));
+		jo.add("lineup", gson.fromJson(lineup.toString(), JsonElement.class));
+		jo.add("mood", gson.fromJson(mood.toString(), JsonElement.class));
+		
+		return jo;
+	}
+	@Override
+	public String toString() {
+		return toJson().toString();
+	}
+	public static Perform newPerform() {
+		Perform p = new Perform();
+		
+		p.setId("per-"+RandomUtil.getString(7));
+		p.setPerformName("per-"+RandomUtil.getString(5));
+		p.setPrice(RandomUtil.getFloat());
+		p.setPlaceName("per-"+RandomUtil.getString(7));
+		p.setPlaceAddress01("per-"+RandomUtil.getString(8));
+		p.setPlaceAddress02("per-"+RandomUtil.getString(8));
+		p.setPosterUrl("per-"+RandomUtil.getString(8));
+		p.setDescription("per-"+RandomUtil.getString(8));
+		p.setSchedule(new ArrayList<Schedule>(){
+			{
+				add(Schedule.newSchedule());
+				add(Schedule.newSchedule());
+			}
+		});
+		p.setLineup(new ArrayList<Musician>(){
+			{
+				add(Musician.newMusician());
+				add(Musician.newMusician());
+			}
+		});
+		p.setMood(new ArrayList<String>(){
+			{
+				add(RandomUtil.getString(7));
+				add(RandomUtil.getString(7));
+			}
+		});
+		
+		return p;
 	}
 }

@@ -17,5 +17,7 @@
 
     <!-- Perform -->
     <string name="unit">Dollar</string>
+    <string name="title_activity_hongkun">HongkunActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
