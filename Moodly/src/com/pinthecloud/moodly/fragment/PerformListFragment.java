@@ -1,5 +1,6 @@
 package com.pinthecloud.moodly.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -44,18 +45,6 @@ public class PerformListFragment extends MoFragment{
 	@Override
 	public void onStart() {
 		super.onStart();
-
-		//		Perform perform = new Perform();
-		//		perform.setPerformName("테스트2");
-		//		perform.setPosterUrl("none");
-		//		perform.setPrice(0);
-		//		perform.setTheaterAddress("서초구");
-		//		perform.setTheaterName("클럽ff");
-		//		perform.setBeginDay("10/29");
-		//		perform.setFinishDay("10/30");
-		//		perform.setPerformTime("19:00");
-		//		performHelper.addPerformAsync(thisFragment, perform, null);
-
 		progressBar.setVisibility(View.VISIBLE);
 		updatePerformList();
 	}
@@ -102,6 +91,19 @@ public class PerformListFragment extends MoFragment{
 
 				performListAdapter.clear();
 				performListAdapter.addAll(list);
+				
+				// Mock data
+				ArrayList<Perform> pList = new ArrayList<Perform>();
+
+				Perform p = new Perform();
+				p.setPerformName("테스트");
+				pList.add(p);
+
+				p = new Perform();
+				p.setPerformName("테스트2");
+				pList.add(p);
+				
+				performListAdapter.addAll(pList);
 			}
 		});
 	}

@@ -17,5 +17,6 @@
 
     <!-- Perform -->
     <string name="unit">Dollar</string>
+    <string name="youtube_player_error_message">There was an error initializing the YouTubePlayer (%1$s)</string>
 
 </resources>

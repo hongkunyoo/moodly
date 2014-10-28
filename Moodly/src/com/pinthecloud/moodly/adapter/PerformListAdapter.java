@@ -48,8 +48,8 @@ public class PerformListAdapter extends ArrayAdapter<Perform>{
 		if (perform != null) {
 			findComponent(view);
 			setTextView(perform);
-			blobStorageHelper.setImageViewAsync(frag, BlobStorageHelper.PERFORM_POSTER, 
-					perform.getPosterUrl(), null, poster, false);
+//			blobStorageHelper.setImageViewAsync(frag, BlobStorageHelper.PERFORM_POSTER, 
+//					perform.getPosterUrl(), null, poster, false);
 		}
 		return view;
 	}
