@@ -12,6 +12,10 @@
     <string name="internet_not_connected_message">Internet is unavailable. Please check network status.</string>
     <string name="google_play_services_not_existed_message">Google Play Service is unavailable. Please check it.</string>
 
+    <!-- Hongkun -->
+    <string name="title_activity_hongkun">HongkunActivity</string>
+    <string name="hello_world">Hello World!</string>
+    
     <!-- Guide -->
     <string name="start_app">Start App!</string>
 

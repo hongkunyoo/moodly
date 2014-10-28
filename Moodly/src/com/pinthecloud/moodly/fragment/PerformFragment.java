@@ -109,12 +109,12 @@ public class PerformFragment extends MoFragment{
 		ArrayList<Musician> mList = new ArrayList<Musician>();
 
 		Musician m = new Musician();
-		m.setName("S White");
+		m.setKorName("S White");
 		m.setVideoLink("QuNOnQJEDGg");
 		mList.add(m);
 
 		m = new Musician();
-		m.setName("구글");
+		m.setKorName("구글");
 		m.setVideoLink("nCgQDjiotG0");
 		mList.add(m);
 
@@ -131,7 +131,7 @@ public class PerformFragment extends MoFragment{
 			musicianLayout.setOrientation(LinearLayout.VERTICAL);
 
 			TextView musicianName = new TextView(context);
-			musicianName.setText(musician.getName());
+			musicianName.setText(musician.getKorName());
 
 			final ProgressBar progressBar = new ProgressBar(context);
 

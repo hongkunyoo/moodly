@@ -2,6 +2,10 @@ package com.pinthecloud.moodly.helper;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
@@ -22,7 +26,7 @@ public class PerformHelper {
 
 	private MobileServiceTable<Perform> performTable;
 	private MobileServiceClient mClient;
-
+	private final String ADD_PERFORM = "add_perform";
 
 	public PerformHelper() {
 		super();
@@ -40,19 +44,16 @@ public class PerformHelper {
 			ExceptionManager.fireException(new MoException(frag, "addPerformAsync", MoException.TYPE.INTERNET_NOT_CONNECTED));
 			return;
 		}
-
-		performTable.insert(perform, new TableOperationCallback<Perform>() {
-
+		Gson g= new Gson();
+		JsonElement json = g.fromJson(g.toJson(perform), JsonElement.class);
+		
+		mClient.invokeApi(ADD_PERFORM, json, new ApiJsonOperationCallback() {
+			
 			@Override
-			public void onCompleted(Perform entity, Exception exception, ServiceFilterResponse response) {
-				if (exception == null) {
-					if (callback != null){
-						callback.onCompleted(entity);
-					}
-					AsyncChainer.notifyNext(frag);
-				} else {
-					ExceptionManager.fireException(new MoException(frag, "addPerformAsync", MoException.TYPE.SERVER_ERROR));
-				}
+			public void onCompleted(JsonElement arg0, Exception arg1,
+					ServiceFilterResponse arg2) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}
