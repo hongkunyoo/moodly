@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 
 import com.pinthecloud.moodly.MoGlobalVariable;
 import com.pinthecloud.moodly.R;
-import com.pinthecloud.moodly.activity.HongkunActivity;
+import com.pinthecloud.moodly.activity.GuideActivity;
+import com.pinthecloud.moodly.activity.PerformListActivity;
 import com.pinthecloud.moodly.dialog.MoAlertDialog;
 import com.pinthecloud.moodly.exception.MoException;
 import com.pinthecloud.moodly.interfaces.MoDialogCallback;
@@ -69,12 +70,12 @@ public class SplashFragment extends MoFragment{
 	private void goToNextActivity() {
 		if(thisFragment.isAdded()){
 			Intent intent = new Intent();
-			intent.setClass(context, HongkunActivity.class);
-//			if (!userHelper.isLoggedInUser()){
-//				intent.setClass(context, GuideActivity.class);
-//			} else{
-//				intent.setClass(context, PerformListActivity.class);
-//			}
+			//			intent.setClass(context, HongkunActivity.class);
+			if (!userHelper.isLoggedInUser()){
+				intent.setClass(context, GuideActivity.class);
+			} else{
+				intent.setClass(context, PerformListActivity.class);
+			}
 			startActivity(intent);
 		}
 	}

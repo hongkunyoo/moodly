@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
@@ -46,14 +45,13 @@ public class PerformHelper {
 		}
 		Gson g= new Gson();
 		JsonElement json = g.fromJson(g.toJson(perform), JsonElement.class);
-		
+
 		mClient.invokeApi(ADD_PERFORM, json, new ApiJsonOperationCallback() {
-			
+
 			@Override
 			public void onCompleted(JsonElement arg0, Exception arg1,
 					ServiceFilterResponse arg2) {
-				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
