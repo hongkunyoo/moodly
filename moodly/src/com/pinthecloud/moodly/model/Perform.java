@@ -1,17 +1,27 @@
 package com.pinthecloud.moodly.model;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.pinthecloud.moodly.util.RandomUtil;
 
-public class Perform implements Parcelable{
+public class Perform implements Parcelable, JsonSerializer<Perform>, JsonDeserializer<Perform> {
 	private String id;
 	private String performName;
 	private float price;
@@ -153,40 +163,21 @@ public class Perform implements Parcelable{
 		in.readList(mood, String.class.getClassLoader());
 		setMood(mood);
 	}
-	
-	public JsonElement toJson() {
-		Gson gson = new Gson();
-		JsonObject jo = new JsonObject();
-		
-		jo.addProperty("id", getId());
-		jo.addProperty("performName", getPerformName());
-		jo.addProperty("price", getPrice());
-		jo.addProperty("placeName", getPlaceName());
-		jo.addProperty("placeAddress01", getPlaceAddress01());
-		jo.addProperty("placeAddress02", getPlaceAddress02());
-		jo.addProperty("postUrl", getPosterUrl());
-		jo.addProperty("description", getDescription());
-		jo.add("schedule", gson.fromJson(schedule.toString(), JsonElement.class));
-		jo.add("lineup", gson.fromJson(lineup.toString(), JsonElement.class));
-		jo.add("mood", gson.fromJson(mood.toString(), JsonElement.class));
-		
-		return jo;
-	}
 	@Override
 	public String toString() {
-		return toJson().toString();
+		return new Gson().toJson(this);
 	}
 	public static Perform newPerform() {
 		Perform p = new Perform();
 		
 		p.setId("per-"+RandomUtil.getString(7));
-		p.setPerformName("per-"+RandomUtil.getString(5));
+		p.setPerformName("per-"+RandomUtil.getObjName());
 		p.setPrice(RandomUtil.getFloat());
-		p.setPlaceName("per-"+RandomUtil.getString(7));
-		p.setPlaceAddress01("per-"+RandomUtil.getString(8));
+		p.setPlaceName("per-"+RandomUtil.getObjName());
+		p.setPlaceAddress01("per-"+RandomUtil.getObjName());
 		p.setPlaceAddress02("per-"+RandomUtil.getString(8));
-		p.setPosterUrl("per-"+RandomUtil.getString(8));
-		p.setDescription("per-"+RandomUtil.getString(8));
+		p.setPosterUrl("per-http://"+RandomUtil.getString(6)+".com");
+		p.setDescription("per-"+RandomUtil.getObjName()+"is a " + RandomUtil.getObjName());
 		p.setSchedule(new ArrayList<Schedule>(){
 			{
 				add(Schedule.newSchedule());
@@ -201,11 +192,98 @@ public class Perform implements Parcelable{
 		});
 		p.setMood(new ArrayList<String>(){
 			{
-				add(RandomUtil.getString(7));
-				add(RandomUtil.getString(7));
+				add(RandomUtil.getObjName());
+				add(RandomUtil.getObjName());
 			}
 		});
 		
 		return p;
+	}
+	
+	@Override
+	public JsonElement serialize(Perform arg0, Type arg1,
+			JsonSerializationContext arg2) {
+		// TODO Auto-generated method stub
+		GsonBuilder gb = new GsonBuilder();
+		gb.addSerializationExclusionStrategy(new ExclusionStrategy() {
+			
+			@Override
+			public boolean shouldSkipField(FieldAttributes arg0) {
+				// TODO Auto-generated method stub
+				String fieldName = arg0.getName();
+				if ("schedule".equals(fieldName) || "lineup".equals(fieldName)
+						|| "mood".equals(fieldName)) {
+					return true;
+				}
+				return false;
+			}
+			
+			@Override
+			public boolean shouldSkipClass(Class<?> arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		Gson gson = gb.create();
+		
+		JsonObject jo = gson.fromJson(gson.toJson(arg0), JsonObject.class);
+		jo.add("schedule", gson.fromJson(schedule.toString(), JsonElement.class));
+		jo.add("lineup", gson.fromJson(lineup.toString(), JsonElement.class));
+		jo.add("mood", gson.fromJson(mood.toString(), JsonElement.class));
+		
+		return jo;
+	}
+	@Override
+	public Perform deserialize(JsonElement arg0, Type arg1,
+			JsonDeserializationContext arg2) throws JsonParseException {
+		// TODO Auto-generated method stub
+		GsonBuilder gb = new GsonBuilder();
+		gb.addDeserializationExclusionStrategy(new ExclusionStrategy() {
+			
+			@Override
+			public boolean shouldSkipField(FieldAttributes arg0) {
+				// TODO Auto-generated method stub
+				String fieldName = arg0.getName();
+				if ("schedule".equals(fieldName) || "lineup".equals(fieldName)
+						|| "mood".equals(fieldName)) {
+					return true;
+				}
+				return false;
+			}
+			
+			@Override
+			public boolean shouldSkipClass(Class<?> arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		Gson gson = gb.create();
+		Perform per  = gson.fromJson(arg0, Perform.class);
+		JsonObject jo = (JsonObject)arg0;
+		
+		List<Schedule> schedule = new ArrayList<Schedule>();
+		JsonElement je = jo.get("schedule");
+		JsonArray ja = je.getAsJsonArray();
+		for (JsonElement jj : ja) {
+			schedule.add(new Gson().fromJson(jj, Schedule.class));
+		}
+		per.setSchedule(schedule);
+		
+		List<Musician> lineup = new ArrayList<Musician>();
+		je = jo.get("lineup");
+		ja = je.getAsJsonArray();
+		for (JsonElement jj : ja) {
+			lineup.add(new Gson().fromJson(jj, Musician.class));
+		}
+		per.setLineup(lineup);
+		
+		List<String> mood = new ArrayList<String>();
+		je = jo.get("mood");
+		ja = je.getAsJsonArray();
+		for (JsonElement jj : ja) {
+			mood.add(new Gson().fromJson(jj, String.class));
+		}
+		per.setMood(mood);
+		return per;
 	}
 }

@@ -1,8 +1,11 @@
 package com.pinthecloud.moodly.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RandomUtil {
+	
 	public static String getString() {
 		return getString(getInt(25));
 	}
@@ -36,4 +39,69 @@ public class RandomUtil {
 	public static String getDate() {
 		return "2014."+getInt(13)+"."+getInt(31);
 	}
+	public static String getName() {
+		return nameList.get(getInt(nameList.size()));
+	}
+	public static String getObjName() {
+		return objList.get(getInt(objList.size()));
+	}
+	private static List<String> nameList = new ArrayList<String>(){
+		{
+			add("Bob");
+			add("Tom");
+			add("Noah");
+			add("Liam");
+			add("Emma");
+			add("Olivia");
+			add("Khaleesi");
+			add("Asher");
+			add("Ethan");
+			add("Mia");
+			add("Ava");
+			add("Michael");
+			add("Emily");
+			add("Hazel");
+			add("Violet");
+			add("Seungmin");
+			add("Milo");
+			add("Jasper");
+			add("Ezra");
+			add("Jayden");
+			add("Madison");
+			add("Elizabeth");
+			add("Charlotte");
+			add("Henry");
+		}
+	};
+	
+	private static List<String> objList = new ArrayList<String>(){
+		{
+			add("Apple");
+			add("Banna");
+			add("Cherry");
+			add("Dog");
+			add("Elephant");
+			add("Flamingo");
+			add("Guitar");
+			add("Horse");
+			add("IceCream");
+			add("Jelly");
+			add("Kellogg");
+			add("Lemon");
+			add("Monkey");
+			add("North");
+			add("Omega");
+			add("Pig");
+			add("Qeen");
+			add("Rihno");
+			add("Street");
+			add("Tiger");
+			add("Umbrella");
+			add("Violet");
+			add("Whale");
+			add("Xylitol");
+			add("Yogurt");
+			add("Zoo");
+		}
+	};
 }
