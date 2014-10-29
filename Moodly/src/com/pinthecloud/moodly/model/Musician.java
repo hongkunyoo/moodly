@@ -27,7 +27,14 @@ public class Musician implements Parcelable, JsonSerializer<Musician>, JsonDeser
 	public enum Genre {
 		DANCE(0),
 		BALLAD(1),
-		HIPHOP(2);
+		HIPHOP(2),
+		ROCK(3),
+		FOLK(4),
+		RNB(5),
+		JAZZ(6),
+		INDI(7),
+		HOUSE(8),
+		POP(9);
 
 		private final int value;
 
