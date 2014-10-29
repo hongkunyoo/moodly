@@ -1,7 +1,7 @@
 package com.pinthecloud.moodly.fragment;
 
-import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +18,10 @@ public class IntroduceFragment extends MoFragment{
 		setActionBar();
 		return view;
 	}
-	
-	
+
+
 	private void setActionBar(){
-		ActionBar actionBar = activity.getActionBar();
+		ActionBar actionBar = activity.getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
 	}

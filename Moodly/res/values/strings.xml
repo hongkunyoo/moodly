@@ -21,6 +21,7 @@
 
     <!-- Perform -->
     <string name="unit">Dollar</string>
+    <string name="error_thumbnail_view">There was an error initializing the YouTubeThumbnailView (%1$s)</string>
     <string name="youtube_player_error_message">There was an error initializing the YouTubePlayer (%1$s)</string>
 
 </resources>

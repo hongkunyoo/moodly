@@ -27,21 +27,19 @@ public class PerformListActivity extends MoActivity{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.perform_list, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		super.onOptionsItemSelected(item);
 		switch (item.getItemId()) {
 		case R.id.perform_list_menu_contact:
 			Intent intent = new Intent(thisActivity, IntroduceActivity.class);
 			startActivity(intent);
 			break;
 		}
-		return true;
+		return super.onOptionsItemSelected(item);
 	}
 }

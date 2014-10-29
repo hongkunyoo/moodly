@@ -2,6 +2,7 @@ package com.pinthecloud.moodly.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.pinthecloud.moodly.MoApplication;
@@ -10,7 +11,7 @@ import com.pinthecloud.moodly.analysis.FiveRocksHelper;
 import com.pinthecloud.moodly.analysis.FlurryHelper;
 import com.pinthecloud.moodly.analysis.UserHabitHelper;
 
-public class MoActivity extends Activity{
+public class MoActivity extends ActionBarActivity{
 
 	protected MoApplication app;
 	protected MoActivity thisActivity;
