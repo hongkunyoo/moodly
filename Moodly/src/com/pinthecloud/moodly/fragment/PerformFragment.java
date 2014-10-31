@@ -1,6 +1,5 @@
 package com.pinthecloud.moodly.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
+import com.google.common.collect.Lists;
 import com.pinthecloud.moodly.MoGlobalVariable;
 import com.pinthecloud.moodly.R;
 import com.pinthecloud.moodly.adapter.PerformVideoListAdapter;
@@ -107,7 +107,7 @@ public class PerformFragment extends MoFragment{
 
 	private void setMusicianVideoList(List<Musician> lineup){
 		// Mock data
-		lineup = new ArrayList<Musician>();
+		lineup = Lists.newArrayList();
 
 		Musician m = new Musician();
 		m.setKorName("S White");
@@ -126,7 +126,7 @@ public class PerformFragment extends MoFragment{
 		performVideoListLayoutManager = new LinearLayoutManager(context);
 		performVideoList.setLayoutManager(performVideoListLayoutManager);
 
-		performVideoListAdapter = new PerformVideoListAdapter(context, thisFragment, lineup.toArray(new Musician[lineup.size()]));
+		performVideoListAdapter = new PerformVideoListAdapter(context, thisFragment, lineup);
 		performVideoList.setAdapter(performVideoListAdapter);
 
 		layout.addView(performVideoList);

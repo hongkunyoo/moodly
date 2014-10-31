@@ -6,4 +6,7 @@
     <dimen name="line_width">1dp</dimen>
     <dimen name="line_thick_width">2dp</dimen>
 
+    <!-- Perform List -->
+    <dimen name="perform_list_item_margin">10dp</dimen>
+    
 </resources>

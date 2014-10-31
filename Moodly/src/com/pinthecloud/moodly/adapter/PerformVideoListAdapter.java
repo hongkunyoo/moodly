@@ -34,29 +34,35 @@ public class PerformVideoListAdapter extends RecyclerView.Adapter<PerformVideoLi
 	private Context context;
 	private MoActivity activity;
 	private MoFragment frag;
-	private Musician[] musicianList;
+	private List<Musician> musicianList;
 	private Dialog errorDialog;
+
+
+	// Provide a suitable constructor (depends on the kind of dataset)
+	public PerformVideoListAdapter(Context context, MoFragment frag, List<Musician> musicianList) {
+		this.context = context;
+		this.activity = (MoActivity)context;
+		this.frag = frag;
+		this.musicianList = musicianList;
+	}
 
 
 	// Provide a reference to the views for each data item
 	// Complex data items may need more than one view per item, and
 	// you provide access to all the views for a data item in a view holder
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-		// each data item is just a string in this case
 		public View view;
+		public TextView musicianName;
+		public ProgressBar progressBar;
+		public YouTubeThumbnailView thumbnailView;
+
 		public ViewHolder(View view) {
 			super(view);
 			this.view = view;
+			this.musicianName = (TextView)view.findViewById(R.id.row_perform_video_list_musician_name);
+			this.progressBar = (ProgressBar)view.findViewById(R.id.row_perform_video_list_progress_bar);
+			this.thumbnailView = (YouTubeThumbnailView)view.findViewById(R.id.row_perform_video_list_video_thumbnail);
 		}
-	}
-
-
-	// Provide a suitable constructor (depends on the kind of dataset)
-	public PerformVideoListAdapter(Context context, MoFragment frag, Musician[] musicianList) {
-		this.context = context;
-		this.activity = (MoActivity)context;
-		this.frag = frag;
-		this.musicianList = musicianList;
 	}
 
 
@@ -76,21 +82,26 @@ public class PerformVideoListAdapter extends RecyclerView.Adapter<PerformVideoLi
 	// Replace the contents of a view (invoked by the layout manager)
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
-		// - get element from your dataset at this position
-		// - replace the contents of the view with that element
-		View view = holder.view;
-		TextView musicianName = (TextView)view.findViewById(R.id.row_perform_video_list_musician_name);
-		final ProgressBar progressBar = (ProgressBar)view.findViewById(R.id.row_perform_video_list_progress_bar);
-		YouTubeThumbnailView thumbnailView = (YouTubeThumbnailView)view.findViewById(R.id.row_perform_video_list_video_thumbnail);
+		Musician musician = musicianList.get(position);
+		setComponent(holder, musician);
+	}
 
-		final Musician musician = musicianList[position];
-		musicianName.setText(musician.getKorName());
-		thumbnailView.initialize(MoGlobalVariable.GOOGLE_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
+
+	// Return the size of your dataset (invoked by the layout manager)
+	@Override
+	public int getItemCount() {
+		return this.musicianList.size();
+	}
+
+
+	private void setComponent(final ViewHolder holder, final Musician musician){
+		holder.musicianName.setText(musician.getKorName());
+		holder.thumbnailView.initialize(MoGlobalVariable.GOOGLE_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
 
 			@Override
 			public void onInitializationSuccess(YouTubeThumbnailView thumbnailView, 
 					YouTubeThumbnailLoader thumbnailLoader) {
-				thumbnailLoader.setOnThumbnailLoadedListener(new ThumbnailListener(progressBar));
+				thumbnailLoader.setOnThumbnailLoadedListener(new ThumbnailListener(holder.progressBar));
 				thumbnailLoader.setVideo(musician.getVideoLink());
 			}
 
@@ -109,13 +120,6 @@ public class PerformVideoListAdapter extends RecyclerView.Adapter<PerformVideoLi
 				}
 			}
 		});
-	}
-
-
-	// Return the size of your dataset (invoked by the layout manager)
-	@Override
-	public int getItemCount() {
-		return this.musicianList.length;
 	}
 
 
