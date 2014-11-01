@@ -40,11 +40,13 @@
             android:name=".activity.PerformListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PerformActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.IntroduceActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.TempActivity" />
+        <activity
+            android:name=".activity.PerformActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentActionBarAppTheme" />
         <activity
             android:name="com.pinthecloud.moodly.activity.HongkunActivity"
             android:label="@string/title_activity_hongkun" >

@@ -3,43 +3,45 @@ package com.pinthecloud.moodly.fragment;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
+import com.google.android.youtube.player.YouTubeThumbnailLoader;
+import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.google.common.collect.Lists;
 import com.pinthecloud.moodly.MoGlobalVariable;
 import com.pinthecloud.moodly.R;
-import com.pinthecloud.moodly.adapter.PerformVideoListAdapter;
 import com.pinthecloud.moodly.model.Musician;
 import com.pinthecloud.moodly.model.Perform;
 
 public class PerformFragment extends MoFragment{
 
+	private static final int RECOVERY_DIALOG_REQUEST = 1;
 	private static final int REQ_START_STANDALONE_PLAYER = 1;
+	private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
+	private Dialog errorDialog;
 
 	private Perform perform;
 
-	private LinearLayout layout;
+	private LinearLayout videoListLayout;
 	private TextView performName;
 	private TextView placeName;
 	private TextView placeAddress01;
 	private TextView placeAddress02;
 	private TextView price;
-
-	private RecyclerView performVideoList;
-	private RecyclerView.Adapter<PerformVideoListAdapter.ViewHolder> performVideoListAdapter;
-	private RecyclerView.LayoutManager performVideoListLayoutManager;
 
 
 	@Override
@@ -87,7 +89,7 @@ public class PerformFragment extends MoFragment{
 
 
 	private void findComponent(View view){
-		layout = (LinearLayout)view.findViewById(R.id.perform_frag_layout);
+		videoListLayout = (LinearLayout)view.findViewById(R.id.perform_frag_video_list_layout);
 		performName = (TextView)view.findViewById(R.id.perform_frag_perform_name);
 		placeName = (TextView)view.findViewById(R.id.perform_frag_theater_name);
 		placeAddress02 = (TextView)view.findViewById(R.id.perform_frag_theater_address);
@@ -119,16 +121,145 @@ public class PerformFragment extends MoFragment{
 		m.setVideoLink("nCgQDjiotG0");
 		lineup.add(m);
 
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+		m = new Musician();
+		m.setKorName("구글");
+		m.setVideoLink("nCgQDjiotG0");
+		lineup.add(m);
+
+
 		// setMusicianVideoList
-		performVideoList = new RecyclerView(context);
-		performVideoList.setHasFixedSize(true);
+		for(int i=0 ; i<lineup.size() ; i++){
+			ViewHolder viewHolder = onCreateViewHolder(videoListLayout);
+			onBindViewHolder(viewHolder, lineup.get(i));
+			videoListLayout.addView(viewHolder.view);
+		}
+	}
 
-		performVideoListLayoutManager = new LinearLayoutManager(context);
-		performVideoList.setLayoutManager(performVideoListLayoutManager);
 
-		performVideoListAdapter = new PerformVideoListAdapter(context, thisFragment, lineup);
-		performVideoList.setAdapter(performVideoListAdapter);
+	public class ViewHolder extends View {
+		public View view;
+		public TextView musicianName;
+		public ProgressBar progressBar;
+		public YouTubeThumbnailView thumbnailView;
 
-		layout.addView(performVideoList);
+		public ViewHolder(View view) {
+			super(context);
+			this.view = view;
+			this.musicianName = (TextView)view.findViewById(R.id.row_perform_video_list_musician_name);
+			this.progressBar = (ProgressBar)view.findViewById(R.id.row_perform_video_list_progress_bar);
+			this.thumbnailView = (YouTubeThumbnailView)view.findViewById(R.id.row_perform_video_list_video_thumbnail);
+		}
+	}
+
+
+	public ViewHolder onCreateViewHolder(ViewGroup parent) {
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_perform_video_list, parent, false);
+		ViewHolder viewHolder = new ViewHolder(view);
+		return viewHolder;
+	}
+
+
+	public void onBindViewHolder(final ViewHolder holder, final Musician musician) {
+		holder.musicianName.setText(musician.getKorName());
+		holder.thumbnailView.setTag(musician.getVideoLink());
+		holder.thumbnailView.initialize(MoGlobalVariable.GOOGLE_API_KEY, new ThumbnailInitializedListener(holder));
+	}
+
+
+	private final class ThumbnailInitializedListener implements YouTubeThumbnailView.OnInitializedListener {
+		private ViewHolder holder;
+
+		public ThumbnailInitializedListener(ViewHolder holder) {
+			super();
+			this.holder = holder;
+		}
+
+		@Override
+		public void onInitializationSuccess(YouTubeThumbnailView thumbnailView, YouTubeThumbnailLoader thumbnailLoader) {
+			thumbnailLoader.setOnThumbnailLoadedListener(new ThumbnailLoadedListener(holder.progressBar));
+			thumbnailLoader.setVideo(thumbnailView.getTag().toString());
+		}
+
+		@Override
+		public void onInitializationFailure(YouTubeThumbnailView thumbnailView, 
+				YouTubeInitializationResult errorReason) {
+			if (errorReason.isUserRecoverableError()) {
+				if (errorDialog == null || !errorDialog.isShowing()) {
+					errorDialog = errorReason.getErrorDialog(activity, RECOVERY_DIALOG_REQUEST);
+					errorDialog.show();
+				}
+			} else {
+				String errorMessage =
+						String.format(context.getString(R.string.error_thumbnail_view), errorReason.toString());
+				Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
+
+	private final class ThumbnailLoadedListener implements YouTubeThumbnailLoader.OnThumbnailLoadedListener {
+		private ProgressBar progressBar;
+
+		public ThumbnailLoadedListener(ProgressBar progressBar) {
+			super();
+			this.progressBar = progressBar;
+		}
+
+		@Override
+		public void onThumbnailLoaded(YouTubeThumbnailView thumbnail, final String videoId) {
+			progressBar.setVisibility(View.GONE);
+			thumbnail.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = YouTubeStandalonePlayer.createVideoIntent(
+							activity, MoGlobalVariable.GOOGLE_API_KEY, videoId, 0, true, false);
+
+					if (canResolveIntent(intent)) {
+						startActivityForResult(intent, REQ_START_STANDALONE_PLAYER);
+					} else {
+						// Could not resolve the intent - must need to install or update the YouTube API service.
+						YouTubeInitializationResult.SERVICE_MISSING.getErrorDialog(
+								activity, REQ_RESOLVE_SERVICE_MISSING).show();
+					}
+				}
+			});
+		}
+
+		@Override
+		public void onThumbnailError(YouTubeThumbnailView thumbnail,
+				YouTubeThumbnailLoader.ErrorReason reason) {
+			// Do nothing
+		}
+
+		private boolean canResolveIntent(Intent intent) {
+			List<ResolveInfo> resolveInfo = context.getPackageManager().queryIntentActivities(intent, 0);
+			return resolveInfo != null && !resolveInfo.isEmpty();
+		}
 	}
 }

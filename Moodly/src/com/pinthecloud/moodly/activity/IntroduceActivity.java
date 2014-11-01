@@ -14,23 +14,22 @@ public class IntroduceActivity extends MoActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_frame);
-		
+
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		IntroduceFragment fragment = new IntroduceFragment();
 		fragmentTransaction.add(R.id.activity_container, fragment);
 		fragmentTransaction.commit();
 	}
-	
-	
+
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		super.onOptionsItemSelected(item);
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			onBackPressed();
 			break;
 		}
-		return true;
+		return super.onOptionsItemSelected(item);
 	}
 }

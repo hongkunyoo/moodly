@@ -23,7 +23,7 @@ public class PerformListFragment extends MoFragment{
 	private ProgressBar progressBar;
 
 	private RecyclerView performListView;
-	private RecyclerView.Adapter<PerformListAdapter.ViewHolder> performListAdapter;
+	private PerformListAdapter performListAdapter;
 	private RecyclerView.LayoutManager performListLayoutManager;
 	private List<Perform> performList;
 
@@ -56,7 +56,7 @@ public class PerformListFragment extends MoFragment{
 		performList = Lists.newArrayList();
 		performListAdapter = new PerformListAdapter(context, thisFragment, performList);
 		performListView.setAdapter(performListAdapter);
-
+		
 		layout.addView(performListView);
 	}
 

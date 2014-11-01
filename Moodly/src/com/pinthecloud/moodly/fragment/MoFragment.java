@@ -23,7 +23,6 @@ public class MoFragment extends Fragment implements ExceptionManager.Handler{
 	protected MoActivity activity;
 	protected MoFragment thisFragment;
 	protected Context context;
-	protected String simpleClassName;
 
 	protected UserHelper userHelper;
 	protected PerformHelper performHelper;
@@ -32,7 +31,6 @@ public class MoFragment extends Fragment implements ExceptionManager.Handler{
 	public MoFragment(){
 		app = MoApplication.getInstance();
 		thisFragment = this;
-		simpleClassName = thisFragment.getClass().getSimpleName();
 		userHelper = app.getUserHelper();
 		performHelper = app.getPerformHelper();
 	}
