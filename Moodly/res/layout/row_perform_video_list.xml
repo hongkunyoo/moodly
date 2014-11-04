@@ -20,11 +20,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ProgressBar
+            <include
                 android:id="@+id/row_perform_video_list_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                layout="@layout/progress_bar" />
 
             <com.google.android.youtube.player.YouTubeThumbnailView
                 android:id="@+id/row_perform_video_list_video_thumbnail"

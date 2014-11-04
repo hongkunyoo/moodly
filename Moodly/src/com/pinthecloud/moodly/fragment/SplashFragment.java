@@ -30,11 +30,11 @@ public class SplashFragment extends MoFragment{
 	private void goToNextActivity() {
 		if(thisFragment.isAdded()){
 			Intent intent = new Intent();
-			//			intent.setClass(context, HongkunActivity.class);
+			//			intent.setClass(activity, HongkunActivity.class);
 			if (!userHelper.isLoggedInUser()){
-				intent.setClass(context, GuideActivity.class);
+				intent.setClass(activity, GuideActivity.class);
 			} else{
-				intent.setClass(context, PerformListActivity.class);
+				intent.setClass(activity, PerformListActivity.class);
 			}
 			startActivity(intent);
 		}

@@ -38,7 +38,7 @@ public class GuideFragment extends MoFragment{
 			@Override
 			public void onClick(View v) {
 				userHelper.setLoggedInUser(true);
-				Intent intent = new Intent(context, PerformListActivity.class);
+				Intent intent = new Intent(activity, PerformListActivity.class);
 				startActivity(intent);
 				activity.finish();
 			}

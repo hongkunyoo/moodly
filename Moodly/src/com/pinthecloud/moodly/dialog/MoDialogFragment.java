@@ -16,14 +16,12 @@ public class MoDialogFragment extends DialogFragment {
 	protected MoDialogFragment thisFragment;
 	protected Context context;
 	protected MoActivity activity;
-	protected String simpleClassName;
 	private boolean isShowing = false;
 
 
 	public MoDialogFragment() {
 		super();
 		this.thisFragment = this;
-		this.simpleClassName =  thisFragment.getClass().getSimpleName();
 	}
 
 
@@ -32,18 +30,6 @@ public class MoDialogFragment extends DialogFragment {
 		context = getActivity();
 		activity = (MoActivity) context;
 		super.onCreate(savedInstanceState);
-	}
-
-
-	@Override
-	public void onStart() {
-		super.onStart();
-	}
-
-
-	@Override
-	public void onStop() {
-		super.onStop();
 	}
 
 

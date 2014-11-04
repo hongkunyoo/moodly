@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.google.common.collect.Lists;
 import com.pinthecloud.moodly.R;
@@ -19,7 +18,6 @@ import com.pinthecloud.moodly.model.Perform;
 
 public class PerformListFragment extends MoFragment{
 
-	private RelativeLayout layout;
 	private ProgressBar progressBar;
 
 	private RecyclerView performListView;
@@ -41,23 +39,20 @@ public class PerformListFragment extends MoFragment{
 
 
 	private void findComponent(View view){
-		layout = (RelativeLayout)view.findViewById(R.id.perform_list_frag_layout);
+		performListView = (RecyclerView)view.findViewById(R.id.perform_list_frag_list);
 		progressBar = (ProgressBar)view.findViewById(R.id.perform_list_frag_progress_bar);
 	}
 
 
 	private void setPerformList(){
-		performListView = new RecyclerView(context);
 		performListView.setHasFixedSize(true);
 
-		performListLayoutManager = new LinearLayoutManager(context);
+		performListLayoutManager = new LinearLayoutManager(activity);
 		performListView.setLayoutManager(performListLayoutManager);
 
 		performList = Lists.newArrayList();
-		performListAdapter = new PerformListAdapter(context, thisFragment, performList);
+		performListAdapter = new PerformListAdapter(activity, thisFragment, performList);
 		performListView.setAdapter(performListAdapter);
-		
-		layout.addView(performListView);
 	}
 
 
@@ -69,6 +64,7 @@ public class PerformListFragment extends MoFragment{
 				progressBar.setVisibility(View.GONE);
 				performList.clear();
 				performList.addAll(list);
+				performListAdapter.notifyDataSetChanged();
 			}
 		});
 	}

@@ -46,7 +46,7 @@
         <activity
             android:name=".activity.PerformActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/TransparentActionBarAppTheme" />
+            android:theme="@style/OverlayActionBarAppTheme" />
         <activity
             android:name="com.pinthecloud.moodly.activity.HongkunActivity"
             android:label="@string/title_activity_hongkun" >

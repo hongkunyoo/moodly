@@ -15,14 +15,17 @@ import android.widget.TextView;
 import com.pinthecloud.moodly.MoApplication;
 import com.pinthecloud.moodly.MoGlobalVariable;
 import com.pinthecloud.moodly.R;
+import com.pinthecloud.moodly.activity.MoActivity;
 import com.pinthecloud.moodly.activity.PerformActivity;
 import com.pinthecloud.moodly.fragment.MoFragment;
 import com.pinthecloud.moodly.helper.CachedBlobStorageHelper;
 import com.pinthecloud.moodly.model.Perform;
+import com.pinthecloud.moodly.util.ActivityAnimator;
 
 public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.ViewHolder> {
 
 	private Context context;
+	private MoActivity activity;
 	private MoFragment frag;
 	private List<Perform> performList;
 
@@ -32,6 +35,7 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 	// Provide a suitable constructor (depends on the kind of dataset)
 	public PerformListAdapter(Context context, MoFragment frag, List<Perform> performList) {
 		this.context = context;
+		this.activity = (MoActivity)context;
 		this.frag = frag;
 		this.performList = performList;
 		this.blobStorageHelper = MoApplication.getInstance().getBlobStorageHelper();
@@ -105,6 +109,7 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 				Intent intent = new Intent(context, PerformActivity.class);
 				intent.putExtra(MoGlobalVariable.PERFORM_KEY, perform);
 				context.startActivity(intent);
+				ActivityAnimator.PullRightPushLeft(activity);
 			}
 		});
 		holder.poster.setOnClickListener(new OnClickListener() {

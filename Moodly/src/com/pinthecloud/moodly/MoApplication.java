@@ -8,8 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.pinthecloud.moodly.analysis.FiveRocksHelper;
-import com.pinthecloud.moodly.analysis.FlurryHelper;
 import com.pinthecloud.moodly.analysis.UserHabitHelper;
 import com.pinthecloud.moodly.helper.CachedBlobStorageHelper;
 import com.pinthecloud.moodly.helper.PerformHelper;
@@ -35,9 +33,7 @@ public class MoApplication extends Application{
 	private static CachedBlobStorageHelper blobStorageHelper;
 
 	// Analysis
-	private static FiveRocksHelper fiveRocksHelper;
 	private static UserHabitHelper userHabitHelper;
-	private static FlurryHelper flurryHelper;
 
 
 	@Override
@@ -66,9 +62,7 @@ public class MoApplication extends Application{
 		performHelper = new PerformHelper();
 		blobStorageHelper = new CachedBlobStorageHelper();
 
-		fiveRocksHelper = new FiveRocksHelper();
 		userHabitHelper = new UserHabitHelper();
-		flurryHelper = new FlurryHelper();
 	}
 
 
@@ -87,14 +81,8 @@ public class MoApplication extends Application{
 	public CachedBlobStorageHelper getBlobStorageHelper() {
 		return blobStorageHelper;
 	}
-	public FiveRocksHelper getFiveRocksHelper() {
-		return fiveRocksHelper;
-	}
 	public UserHabitHelper getUserHabitHelper() {
 		return userHabitHelper;
-	}
-	public FlurryHelper getFlurryHelper(){
-		return flurryHelper;
 	}
 
 

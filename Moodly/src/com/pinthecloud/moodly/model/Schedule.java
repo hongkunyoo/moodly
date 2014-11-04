@@ -36,6 +36,8 @@ public class Schedule implements Parcelable {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
+	
 	/*
 	 * Parcelable
 	 */
@@ -56,17 +58,20 @@ public class Schedule implements Parcelable {
 	public int describeContents() {
 		return 0;
 	}
+	
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(getStart());
 		dest.writeString(getEnd());
 		dest.writeString(getTime());
 	}
+	
 	public void readToParcel(Parcel in){
 		setStart(in.readString());
 		setEnd(in.readString());
 		setTime(in.readString());
 	}
+	
 	@Override
 	public String toString() {
 		return new Gson().toJson(this);

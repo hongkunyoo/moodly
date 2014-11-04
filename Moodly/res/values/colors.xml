@@ -4,7 +4,5 @@
     <!-- Common -->
     <color name="brand_color">#01b3c7</color>
     <color name="brand_color_dark">#1e5085</color>
-    <color name="action_bar_text_color">#ffffff</color>
-    <color name="content_text_color">#000000</color>
 
 </resources>

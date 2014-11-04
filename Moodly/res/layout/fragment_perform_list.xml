@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ProgressBar
+    <include
         android:id="@+id/perform_list_frag_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        layout="@layout/progress_bar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/perform_list_frag_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" />
 
 </RelativeLayout>

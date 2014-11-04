@@ -2,7 +2,6 @@ package com.pinthecloud.moodly.fragment;
 
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,7 +21,6 @@ public class MoFragment extends Fragment implements ExceptionManager.Handler{
 	protected MoApplication app;
 	protected MoActivity activity;
 	protected MoFragment thisFragment;
-	protected Context context;
 
 	protected UserHelper userHelper;
 	protected PerformHelper performHelper;
@@ -38,29 +36,14 @@ public class MoFragment extends Fragment implements ExceptionManager.Handler{
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		context = getActivity();
-		activity = (MoActivity) context;
 		super.onCreate(savedInstanceState);
+		activity = (MoActivity) getActivity();
 		ExceptionManager.setHandler(thisFragment);
 	}
 
 
 	@Override
-	public void onStart() {
-		super.onStart();
-	}
-
-
-	@Override
-	public void onStop() {
-		super.onStop();
-	}
-
-
-	@Override
 	public void handleException(final MoException ex) {
-		Log(thisFragment, "MoFragment handleException : " + ex.toString());
-
 		String title = null;
 		String message = null;
 		if(ex.getType().equals(MoException.TYPE.INTERNET_NOT_CONNECTED)){
