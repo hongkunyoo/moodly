@@ -32,7 +32,6 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 	private CachedBlobStorageHelper blobStorageHelper;
 
 
-	// Provide a suitable constructor (depends on the kind of dataset)
 	public PerformListAdapter(Context context, MoFragment frag, List<Perform> performList) {
 		this.context = context;
 		this.activity = (MoActivity)context;
@@ -42,9 +41,6 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 	}
 
 
-	// Provide a reference to the views for each data item
-	// Complex data items may need more than one view per item, and
-	// you provide access to all the views for a data item in a view holder
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 		public View view;
 		public TextView tag;
@@ -63,20 +59,15 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 	}
 
 
-	// Create new views (invoked by the layout manager)
 	@Override
 	public PerformListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		// create a new view
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_perform_list, parent, false);
-
 		// set the view's size, margins, paddings and layout parameters
-
 		ViewHolder viewHolder = new ViewHolder(view);
 		return viewHolder;
 	}
 
 
-	// Replace the contents of a view (invoked by the layout manager)
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		Perform perform = performList.get(position);
@@ -87,7 +78,6 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 	}
 
 
-	// Return the size of your dataset (invoked by the layout manager)
 	@Override
 	public int getItemCount() {
 		return this.performList.size();
@@ -95,7 +85,12 @@ public class PerformListAdapter extends RecyclerView.Adapter<PerformListAdapter.
 
 
 	private void setTextView(final ViewHolder holder, final Perform perform){
-		holder.tag.setText(perform.getPerformName());
+//		List<String> moodList = perform.getMood();
+//		String mood = null;
+//		for(int i=0 ; i<moodList.size() ; i++){
+//			mood += moodList.get(i);
+//		}
+//		holder.tag.setText(mood);
 		holder.performName.setText(perform.getPerformName());
 		holder.theaterAddress.setText(perform.getPlaceAddress02());
 	}

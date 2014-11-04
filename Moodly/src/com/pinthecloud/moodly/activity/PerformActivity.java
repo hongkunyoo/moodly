@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -51,17 +52,15 @@ public class PerformActivity extends MoActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		FadingActionBarHelper helper = new FadingActionBarHelper()
+		perform = getIntent().getParcelableExtra(MoGlobalVariable.PERFORM_KEY);
 		
+		FadingActionBarHelper helper = new FadingActionBarHelper()
 		.actionBarBackground(R.drawable.perform_activity_header)
-		.headerLayout(R.layout.activity_perform_header)
+		.headerView(new ImageView(thisActivity))
 		.contentLayout(R.layout.activity_perform);
 		setContentView(helper.createView(thisActivity));
 		helper.initActionBar(thisActivity);
-
-		Intent intent = getIntent();
-		perform = intent.getParcelableExtra(MoGlobalVariable.PERFORM_KEY);
-
+		
 		findComponent();
 		setActionBar();
 		setTextView(perform);

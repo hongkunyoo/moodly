@@ -8,5 +8,7 @@
 
     <!-- Perform List -->
     <dimen name="perform_list_item_margin">10dp</dimen>
+    <dimen name="perform_list_poster_width">100dp</dimen>
+    <dimen name="perform_list_poster_height">200dp</dimen>
     
 </resources>
